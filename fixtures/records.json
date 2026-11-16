@@ -1,20 +1,16 @@
 [
   {
-    "sourceId": "permit-notices-demo-1",
-    "source": "sample-source",
-    "observedAt": "2026-11-16T09:00:00Z",
-    "label": "许可公告",
+    "sourceId": "N1",
+    "source": "建设许可公告目录",
+    "observedAt": "2026-11-16T08:00:00Z",
+    "label": "项目许可",
     "attributes": {
-      "sample": true
-    }
-  },
-  {
-    "sourceId": "permit-notices-demo-2",
-    "source": "sample-source",
-    "observedAt": "2026-11-16T09:05:00Z",
-    "label": "许可公告 2",
-    "attributes": {
-      "sample": true
+      "noticeId": "N1",
+      "permitId": "P1",
+      "title": "项目许可",
+      "action": "grant",
+      "publishedAt": "2026-11-16T08:00:00Z",
+      "effectiveAt": "2026-11-16T08:00:00Z"
     }
   }
 ]

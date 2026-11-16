@@ -1,0 +1,30 @@
+{
+  "stages": {
+    "opening": {
+      "routes": {
+        "/permits/notices": {
+          "contentType": "text/html; charset=utf-8",
+          "body": "<!doctype html><html><body><script type=\"application/json\" class=\"source-record\">{\"noticeId\": \"N1\", \"permitId\": \"P1\", \"title\": \"项目许可\", \"action\": \"grant\", \"publishedAt\": \"2026-11-16T08:00:00Z\", \"effectiveAt\": \"2026-11-16T08:00:00Z\"}</script></body></html>",
+          "etag": "\"opening\""
+        }
+      }
+    },
+    "updated": {
+      "routes": {
+        "/permits/notices": {
+          "contentType": "text/html; charset=utf-8",
+          "body": "<!doctype html><html><body><script type=\"application/json\" class=\"source-record\">{\"noticeId\": \"N2\", \"permitId\": \"P1\", \"title\": \"项目许可更正\", \"action\": \"correct\", \"replaces\": \"N1\", \"publishedAt\": \"2026-11-16T09:00:00Z\", \"effectiveAt\": \"2026-11-16T08:00:00Z\"}</script></body></html>",
+          "etag": "\"updated\""
+        }
+      }
+    },
+    "revoked": {
+      "routes": {
+        "/permits/notices": {
+          "contentType": "text/html",
+          "body": "<!doctype html><html><body><script type=\"application/json\" class=\"source-record\">{\"noticeId\": \"N3\", \"permitId\": \"P1\", \"title\": \"撤销许可\", \"action\": \"revoke\", \"replaces\": \"N2\", \"publishedAt\": \"2026-11-16T10:00:00Z\", \"effectiveAt\": \"2026-11-16T10:00:00Z\"}</script></body></html>"
+        }
+      }
+    }
+  }
+}
