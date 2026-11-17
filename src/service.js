@@ -1,11 +1,16 @@
 import { findRecords, mergeRecords, normalizeRecord } from './records.js';
 
 export class CollectionService {
-  constructor(repository) { this.repository = repository; }
+  // clock 可注入，测试与回放场景不需要等待真实时间。
+  constructor(repository, clock = () => new Date().toISOString()) {
+    this.repository = repository;
+    this.clock = clock;
+  }
 
   async ingest(inputs) {
     if (!Array.isArray(inputs)) throw new TypeError('ingest input must be an array');
-    const accepted = inputs.map(normalizeRecord);
+    const collectedAt = this.clock();
+    const accepted = inputs.map((input) => normalizeRecord({ collectedAt, ...input }));
     const current = await this.repository.read();
     const merged = mergeRecords(current, accepted);
     await this.repository.replace(merged);
