@@ -22,7 +22,16 @@ test('normalization validates identity, source, time, and clones attributes', ()
 test('merge is idempotent and an older observation cannot replace a newer one', () => {
   const first = normalizeRecord(sample('r-1', '2026-11-16T10:00:00Z', 'new'));
   const older = normalizeRecord(sample('r-1', '2026-11-16T09:00:00Z', 'old'));
-  assert.deepEqual(mergeRecords([first], [older, first]), [first]);
+  const merged = mergeRecords([first], [older, first]);
+  assert.equal(merged.length, 1);
+  assert.equal(merged[0].label, 'new', '较旧观察不能覆盖较新观察');
+  assert.equal(merged[0].collectedAt, older.observedAt, '采集知晓时间取最早值，记录内容仍取最新观察');
+});
+
+test('merge 保留本地首次知晓时间，重放或后续观察不能前移', () => {
+  const first = { ...normalizeRecord(sample('r-1', '2026-11-16T09:00:00Z')), collectedAt: '2026-11-16T09:30:00Z' };
+  const replay = { ...normalizeRecord(sample('r-1', '2026-11-16T09:00:00Z')), collectedAt: '2026-11-16T11:00:00Z' };
+  assert.equal(mergeRecords([first], [replay])[0].collectedAt, '2026-11-16T09:30:00Z');
 });
 
 test('queries filter by source and inclusive time boundaries', () => {

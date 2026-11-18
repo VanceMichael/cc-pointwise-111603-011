@@ -1,11 +1,17 @@
 import { findRecords, mergeRecords, normalizeRecord } from './records.js';
 
 export class CollectionService {
-  constructor(repository) { this.repository = repository; }
+  // clock 可注入，便于测试确定性地模拟采集时刻；默认使用系统时钟。
+  constructor(repository, clock = () => new Date().toISOString()) {
+    this.repository = repository;
+    this.clock = clock;
+  }
 
   async ingest(inputs) {
     if (!Array.isArray(inputs)) throw new TypeError('ingest input must be an array');
-    const accepted = inputs.map(normalizeRecord);
+    const now = this.clock();
+    if (!Number.isFinite(Date.parse(now))) throw new Error('clock returned an invalid timestamp');
+    const accepted = inputs.map((input) => ({ ...normalizeRecord(input), collectedAt: now }));
     const current = await this.repository.read();
     const merged = mergeRecords(current, accepted);
     await this.repository.replace(merged);

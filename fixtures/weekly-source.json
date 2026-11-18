@@ -1,0 +1,40 @@
+{
+  "stages": {
+    "opening": {
+      "routes": {
+        "/permits/notices": {
+          "contentType": "text/html; charset=utf-8",
+          "body": "<!doctype html><html><body><script type=\"application/json\" class=\"source-record\">{\"noticeId\": \"W1\", \"permitId\": \"Q1\", \"title\": \"项目许可\", \"action\": \"grant\", \"publishedAt\": \"2026-11-16T08:00:00Z\", \"effectiveAt\": \"2026-11-16T08:00:00Z\"}</script></body></html>",
+          "etag": "\"w-opening\""
+        }
+      }
+    },
+    "corrected": {
+      "routes": {
+        "/permits/notices": {
+          "contentType": "text/html; charset=utf-8",
+          "body": "<!doctype html><html><body><script type=\"application/json\" class=\"source-record\">{\"noticeId\": \"W2\", \"permitId\": \"Q1\", \"title\": \"项目许可更正\", \"action\": \"correct\", \"replaces\": \"W1\", \"publishedAt\": \"2026-11-16T09:00:00Z\", \"effectiveAt\": \"2026-11-16T08:00:00Z\"}</script></body></html>",
+          "etag": "\"w-corrected\""
+        }
+      }
+    },
+    "revoked": {
+      "routes": {
+        "/permits/notices": {
+          "contentType": "text/html; charset=utf-8",
+          "body": "<!doctype html><html><body><script type=\"application/json\" class=\"source-record\">{\"noticeId\": \"W3\", \"permitId\": \"Q1\", \"title\": \"撤销许可\", \"action\": \"revoke\", \"replaces\": \"W2\", \"publishedAt\": \"2026-11-16T10:00:00Z\", \"effectiveAt\": \"2026-11-16T10:00:00Z\"}</script></body></html>",
+          "etag": "\"w-revoked\""
+        }
+      }
+    },
+    "reordered": {
+      "routes": {
+        "/permits/notices": {
+          "contentType": "text/html; charset=utf-8",
+          "body": "<!doctype html><html><body><script type=\"application/json\" class=\"source-record\">{\"noticeId\": \"W3\", \"permitId\": \"Q1\", \"title\": \"撤销许可\", \"action\": \"revoke\", \"replaces\": \"W2\", \"publishedAt\": \"2026-11-16T10:00:00Z\", \"effectiveAt\": \"2026-11-16T10:00:00Z\"}</script><script type=\"application/json\" class=\"source-record\">{\"noticeId\": \"W1\", \"permitId\": \"Q1\", \"title\": \"项目许可\", \"action\": \"grant\", \"publishedAt\": \"2026-11-16T08:00:00Z\", \"effectiveAt\": \"2026-11-16T08:00:00Z\"}</script><script type=\"application/json\" class=\"source-record\">{\"noticeId\": \"W2\", \"permitId\": \"Q1\", \"title\": \"项目许可更正\", \"action\": \"correct\", \"replaces\": \"W1\", \"publishedAt\": \"2026-11-16T09:00:00Z\", \"effectiveAt\": \"2026-11-16T08:00:00Z\"}</script></body></html>",
+          "etag": "\"w-reordered\""
+        }
+      }
+    }
+  }
+}
